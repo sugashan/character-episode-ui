@@ -1,6 +1,13 @@
-# Getting Started with Create React App
+# Getting Started with CHARACTER EPISODE UI
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Create env file
+
+```
+APP_API_BASE_URL=http://localhost:5000/api/v1
+APP_PAGE_LIMIT=20
+```
 
 ## Available Scripts
 
