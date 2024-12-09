@@ -60,9 +60,9 @@ function CharacterListPage({onLogout}) {
     
     const isFavorite = characters.find((char) => char.id === id)?.favorite;
     if (!isFavorite) {
-        await postFavoriteCharacter(id);
+       // await postFavoriteCharacter(id);
     } else {
-        await deleteFavoriteCharacter(id);
+      //  await deleteFavoriteCharacter(id);
     }
 
     setCharacters((prev) =>
