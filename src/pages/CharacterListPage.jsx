@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { fetchCharacters, postFavoriteCharacter, deleteFavoriteCharacter } from "../services/character";
 import CharacterCard from "../components/CharacterCard";
 
@@ -9,6 +9,8 @@ function CharacterListPage({onLogout}) {
 
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);   
+
+  const mounted = useRef(false);
 
 
   const loadCharacters = async () => {
@@ -31,8 +33,10 @@ function CharacterListPage({onLogout}) {
   };
 
   const handleScroll = useCallback(() => {
-    const nearBottom = window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 200;
-    if (nearBottom  && hasMore) {  
+    if (loading || !hasMore) return;
+
+    const nearBottom = window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 100;
+    if (nearBottom  && hasMore) {
       loadCharacters();
     }
   }, [hasMore, loading]);
@@ -47,6 +51,8 @@ function CharacterListPage({onLogout}) {
 
 
   useEffect(() => {
+    if (mounted.current) return;
+    mounted.current = true;
     loadCharacters();
   }, []);
 
